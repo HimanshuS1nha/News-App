@@ -1,50 +1,55 @@
-# Welcome to your Expo app 👋
+# News App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Get the latest breaking news, in-depth stories, and real-time updates from around the world, all in one place.
+
+## Screenshots
+
+![News App 1](https://github.com/user-attachments/assets/7c59fec9-4b0a-4cdc-8876-455ce6d18add)
+
+![News App 2](https://github.com/user-attachments/assets/0e677da3-fe5a-41d1-b0e6-739fa5d118bb)
+
+![News App 3](https://github.com/user-attachments/assets/925767ee-1847-4b4f-a4b5-a9b0e217cbc6)
+
+![News App 4](https://github.com/user-attachments/assets/5f3b0aa0-4333-4e39-a330-41978263b019)
+
+![News App 5](https://github.com/user-attachments/assets/0682c8fb-be9d-463f-a94a-1ff7936071fb)
+
+![News App 6](https://github.com/user-attachments/assets/fe86e0db-20ae-48f4-9e1b-f815075df537)
 
 ## Get started
 
-1. Install dependencies
+1. Get your API key from https://newsapi.org and put it in a .env file with the name EXPO_PUBLIC_API_KEY
+
+2. Install dependencies
 
    ```bash
    npm install
    ```
 
-2. Start the app
+3. Start the app
 
    ```bash
     npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+## Features
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- View top headlines
+- Search news
+- Save articles
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## TECH STACK USED
 
-## Get a fresh project
+- React Native Expo
+- Tailwind CSS
+- React Native Async Storage
+- Expo Secure Store
+- Zustand
 
-When you're ready, run:
+## Demo
 
-```bash
-npm run reset-project
-```
+Live Demo - Coming Soon
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## 🚀 About Me
 
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+My name is Himanshu Sinha and I'm a full stack developer.
