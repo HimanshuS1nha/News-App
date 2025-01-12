@@ -1,16 +1,29 @@
 import { View, Text, Image, Pressable, Linking } from "react-native";
-import React from "react";
+import React, { useCallback } from "react";
 import tw from "twrnc";
-import { Feather } from "@expo/vector-icons";
+import { Feather, FontAwesome } from "@expo/vector-icons";
 
 import ThemedText from "@/components/ThemedText";
 
 import { useTheme } from "@/hooks/useTheme";
+import { useSavedArticles } from "@/hooks/useSavedArticles";
 
 import type { NewsType } from "@/types";
 
 const NewsCard = ({ news }: { news: NewsType }) => {
   const theme = useTheme((state) => state.theme);
+  const { savedArticles, setSavedArticles } = useSavedArticles();
+
+  const isArticleSaved = useCallback(() => {
+    const article = savedArticles.find(
+      (article) =>
+        article.title === news.title &&
+        article.description === news.description &&
+        article.url === news.url
+    );
+
+    return article ? true : false;
+  }, [news, savedArticles]);
   return (
     <View style={tw`flex-row gap-x-4 items-center`}>
       <View style={tw`w-36 h-32`}>
@@ -37,13 +50,38 @@ const NewsCard = ({ news }: { news: NewsType }) => {
         </ThemedText>
 
         <View style={tw`flex-row items-center justify-between`}>
-          <Pressable>
-            <Feather
-              name="bookmark"
-              size={20}
-              color={theme === "light" ? "black" : "white"}
-            />
-          </Pressable>
+          {isArticleSaved() ? (
+            <Pressable
+              onPress={() => {
+                const newSavedArticles = savedArticles.filter(
+                  (article) =>
+                    article.title !== news.title &&
+                    article.description !== news.description &&
+                    article.url !== news.url
+                );
+                setSavedArticles(newSavedArticles);
+              }}
+            >
+              <FontAwesome
+                name="bookmark"
+                size={20}
+                color={theme === "light" ? "black" : "white"}
+              />
+            </Pressable>
+          ) : (
+            <Pressable
+              onPress={() => {
+                const newSavedArticles = [...savedArticles, news];
+                setSavedArticles(newSavedArticles);
+              }}
+            >
+              <FontAwesome
+                name="bookmark-o"
+                size={20}
+                color={theme === "light" ? "black" : "white"}
+              />
+            </Pressable>
+          )}
           <Pressable
             style={tw`flex-row gap-x-0.5 items-center`}
             onPress={() => Linking.openURL(news.url)}

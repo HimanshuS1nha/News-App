@@ -75,7 +75,11 @@ const Home = () => {
           <View style={tw`px-2 gap-y-6`}>
             {data && data.articles ? (
               data.articles
-                .filter((article) => typeof article.description === "string")
+                .filter(
+                  (article) =>
+                    typeof article.description === "string" &&
+                    article.description !== "[Removed]"
+                )
                 .map((article, i) => {
                   return <NewsCard key={i} news={article} />;
                 })

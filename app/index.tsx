@@ -3,14 +3,17 @@ import { useEffect } from "react";
 import { Text, useColorScheme, View } from "react-native";
 
 import { useTheme } from "@/hooks/useTheme";
+import { useSavedArticles } from "@/hooks/useSavedArticles";
 
 export default function Index() {
   const rootNavigationState = useRootNavigationState();
   const systemTheme = useColorScheme();
   const { theme, setTheme } = useTheme();
+  const getSavedArticles = useSavedArticles((state) => state.getSavedArticles);
 
   useEffect(() => {
     if (rootNavigationState?.key) {
+      getSavedArticles();
       if (!theme) {
         setTheme(systemTheme ?? "light");
       }
