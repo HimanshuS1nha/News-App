@@ -20,7 +20,7 @@ const NewsCard = ({ news }: { news: NewsType }) => {
           resizeMode="stretch"
         />
         <View
-          style={tw`absolute bg-indigo-600 w-[95px] bottom-0 right-0 p-1 rounded-full`}
+          style={tw`absolute bg-indigo-600 bottom-0 right-0 p-1 rounded-full`}
         >
           <ThemedText style={tw`text-xs text-white`}>
             {new Date(news.publishedAt).toDateString()}

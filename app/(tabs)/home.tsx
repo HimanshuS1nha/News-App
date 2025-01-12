@@ -10,6 +10,7 @@ import React from "react";
 import tw from "twrnc";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { router } from "expo-router";
 
 import ThemedView from "@/components/ThemedView";
 import ThemedText from "@/components/ThemedText";
@@ -50,6 +51,12 @@ const Home = () => {
               <Pressable
                 key={category.title}
                 style={tw`items-center gap-y-1.5`}
+                onPress={() =>
+                  router.push({
+                    pathname: "/search",
+                    params: { category: category.title.toLowerCase() },
+                  })
+                }
               >
                 <Image
                   source={category.image}
