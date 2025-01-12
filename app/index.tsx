@@ -1,6 +1,10 @@
 import { router, useRootNavigationState } from "expo-router";
 import { useEffect } from "react";
-import { Text, useColorScheme, View } from "react-native";
+import { Image, useColorScheme, View, ActivityIndicator } from "react-native";
+import tw from "twrnc";
+
+import ThemedView from "@/components/ThemedView";
+import ThemedText from "@/components/ThemedText";
 
 import { useTheme } from "@/hooks/useTheme";
 import { useSavedArticles } from "@/hooks/useSavedArticles";
@@ -21,14 +25,17 @@ export default function Index() {
     }
   }, [rootNavigationState?.key]);
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
-    </View>
+    <ThemedView>
+      <View style={tw`flex-1 items-center justify-center gap-y-7`}>
+        <Image
+          source={require("../assets/images/logo.png")}
+          style={tw`size-28 rounded-full`}
+        />
+        <ThemedText style={tw`text-indigo-600 text-3xl font-semibold`}>
+          News App
+        </ThemedText>
+        <ActivityIndicator color={"blue"} size={40} />
+      </View>
+    </ThemedView>
   );
 }

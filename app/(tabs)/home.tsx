@@ -69,7 +69,7 @@ const Home = () => {
           horizontal
           showsHorizontalScrollIndicator={false}
           estimatedItemSize={10}
-          contentContainerStyle={tw`min-h-[50px] px-2`}
+          contentContainerStyle={tw`px-2`}
         />
 
         {isLoading ? (

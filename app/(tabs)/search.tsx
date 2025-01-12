@@ -51,7 +51,6 @@ const Search = () => {
             article.description !== "[Removed]"
         )
       );
-      setSearchQuery("");
     },
     onError: () => {
       Alert.alert("Error", "Some error occured. Please try again later!");
@@ -60,9 +59,11 @@ const Search = () => {
 
   useEffect(() => {
     if (isFocused) {
-      if (searchParams.category.trim() !== "") {
-        setSearchQuery(searchParams.category);
-        getNews(searchParams.category);
+      if (searchParams.category) {
+        if (searchParams.category.trim() !== "") {
+          setSearchQuery(searchParams.category);
+          getNews(searchParams.category);
+        }
       }
     }
   }, [isFocused]);

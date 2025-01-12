@@ -5,14 +5,14 @@ import type { NewsType } from "@/types";
 
 type UseSavedArticlesType = {
   savedArticles: NewsType[];
-  setSavedArticles: (savedArticles: NewsType[]) => Promise<void>;
+  setSavedArticles: (savedArticles: NewsType[]) => void;
   getSavedArticles: () => Promise<void>;
 };
 
 export const useSavedArticles = create<UseSavedArticlesType>((set) => ({
   savedArticles: [],
-  setSavedArticles: async (savedArticles) => {
-    await AsyncStorage.setItem("saved-articles", JSON.stringify(savedArticles));
+  setSavedArticles: (savedArticles) => {
+    AsyncStorage.setItem("saved-articles", JSON.stringify(savedArticles));
     set({ savedArticles });
   },
   getSavedArticles: async () => {
