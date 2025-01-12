@@ -20,7 +20,7 @@ export const categories = [
     image: require("../assets/images/health.png"),
   },
   {
-    title: "business",
+    title: "Business",
     image: require("../assets/images/business.png"),
   },
 ];

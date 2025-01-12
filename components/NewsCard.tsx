@@ -25,7 +25,7 @@ const NewsCard = ({ news }: { news: NewsType }) => {
     return article ? true : false;
   }, [news, savedArticles]);
   return (
-    <View style={tw`flex-row gap-x-4 items-center`}>
+    <View style={tw`flex-row gap-x-4 items-center mb-3`}>
       <View style={tw`w-36 h-32`}>
         <Image
           source={{ uri: news.urlToImage }}

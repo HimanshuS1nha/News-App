@@ -11,6 +11,7 @@ import tw from "twrnc";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { router } from "expo-router";
+import { FlashList } from "@shopify/flash-list";
 
 import ThemedView from "@/components/ThemedView";
 import ThemedText from "@/components/ThemedText";
@@ -39,50 +40,56 @@ const Home = () => {
     <ThemedView>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={tw`gap-y-6 pb-3`}
+        contentContainerStyle={tw`gap-y-6 pb-3 pt-4`}
       >
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={tw`gap-x-3 px-2 mt-4`}
-        >
-          {categories.map((category) => {
+        <FlashList
+          data={categories}
+          keyExtractor={(item) => item.title}
+          renderItem={({ item }) => {
             return (
               <Pressable
-                key={category.title}
-                style={tw`items-center gap-y-1.5`}
+                key={item.title}
+                style={tw`items-center gap-y-1.5 mr-3`}
                 onPress={() =>
                   router.push({
                     pathname: "/search",
-                    params: { category: category.title.toLowerCase() },
+                    params: { category: item.title.toLowerCase() },
                   })
                 }
               >
                 <Image
-                  source={category.image}
+                  source={item.image}
                   style={tw`size-16 rounded-full`}
                   resizeMode="stretch"
                 />
-                <ThemedText>{category.title}</ThemedText>
+                <ThemedText>{item.title}</ThemedText>
               </Pressable>
             );
-          })}
-        </ScrollView>
+          }}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          estimatedItemSize={10}
+          contentContainerStyle={tw`min-h-[50px] px-2`}
+        />
 
         {isLoading ? (
           <ActivityIndicator size={50} color={"blue"} />
         ) : (
           <View style={tw`px-2 gap-y-6`}>
             {data && data.articles ? (
-              data.articles
-                .filter(
+              <FlashList
+                data={data.articles.filter(
                   (article) =>
                     typeof article.description === "string" &&
                     article.description !== "[Removed]"
-                )
-                .map((article, i) => {
-                  return <NewsCard key={i} news={article} />;
-                })
+                )}
+                keyExtractor={(_, i) => i.toString()}
+                renderItem={({ item }) => {
+                  return <NewsCard news={item} />;
+                }}
+                estimatedItemSize={50}
+                showsVerticalScrollIndicator={false}
+              />
             ) : (
               <ThemedText style={tw`text-rose-600 text-center`}>
                 Some error occured.

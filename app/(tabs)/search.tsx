@@ -13,13 +13,18 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useLocalSearchParams } from "expo-router";
 import { useIsFocused } from "@react-navigation/native";
+import { FlashList } from "@shopify/flash-list";
 
 import ThemedView from "@/components/ThemedView";
+import ThemedText from "@/components/ThemedText";
 import NewsCard from "@/components/NewsCard";
+
+import { useTheme } from "@/hooks/useTheme";
 
 import type { NewsType } from "@/types";
 
 const Search = () => {
+  const theme = useTheme((state) => state.theme);
   const isFocused = useIsFocused();
   const searchParams = useLocalSearchParams() as { category: string };
 
@@ -66,7 +71,9 @@ const Search = () => {
       <ScrollView contentContainerStyle={tw`mt-4 gap-y-6 pb-3 px-2`}>
         <View style={tw`flex-row gap-x-3 justify-center items-center`}>
           <TextInput
-            style={tw`border w-[88%] rounded-full px-4`}
+            style={tw`border w-[88%] rounded-full px-4 ${
+              theme === "light" ? "" : "bg-white"
+            }`}
             placeholder="Search by category..."
             value={searchQuery}
             onChangeText={setSearchQuery}
@@ -86,10 +93,21 @@ const Search = () => {
 
         {isPending ? (
           <ActivityIndicator size={50} color={"blue"} />
+        ) : articles.length > 0 ? (
+          <FlashList
+            data={articles}
+            keyExtractor={(item) => item.title}
+            renderItem={({ item }) => {
+              return <NewsCard news={item} />;
+            }}
+            estimatedItemSize={50}
+          />
         ) : (
-          articles.map((article, i) => {
-            return <NewsCard key={i} news={article} />;
-          })
+          <ThemedText
+            style={tw`text-red-600 text-center mt-4 font-bold text-base`}
+          >
+            No articles to show
+          </ThemedText>
         )}
       </ScrollView>
     </ThemedView>
