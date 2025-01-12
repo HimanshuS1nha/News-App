@@ -48,7 +48,7 @@ Get the latest breaking news, in-depth stories, and real-time updates from aroun
 
 ## Demo
 
-Live Demo - Coming Soon
+Live Demo - [Click Here](https://www.youtube.com/shorts/tR3t6UDnFfw)
 
 ## 🚀 About Me
 
